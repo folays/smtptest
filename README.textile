@@ -1,0 +1,52 @@
+h1. smtptest
+
+bq. Mail : Benchmark a remote SMTP with random accounts, for System Administrators
+
+This script will do some plain TCP to connect and send lot of mails to possibly some random accounts on a defined SMTP MX server.
+
+This aim to benchmark the number of mails per second accepted for multiples account by your SMTP MX server.
+
+<pre>
+folays@phenix:~/smtptest$ ./smtptest.pl 
+all threads started 2015 09 07 12:38:04.
+<<< 220 mx.domain.tld
+>>> EHLO FLEX
+<<< 250-mx.domain.tld
+<<< 250 XFILTERED
+>>> MAIL FROM: <postmaster@domain.tld>
+<<< 250 2.1.0 Ok
+>>> RCPT TO: <postmaster@domain.tld>
+<<< 250 ok
+>>> DATA
+<<< 354 Start mail input; end with <CRLF>.<CRLF>
+>>> Message-ID: <848HY8fqClOFNNfT@domain.tld>
+>>> From: postmaster@domain.tld
+>>> To: postmaster@domain.tld
+>>> Subject: [Test SMTP] ./smtptest.pl to mx : test
+>>> 
+>>> Bonjour,
+>>> 
+>>> Je suis un script magique, qui fait des checks.
+>>> 
+>>> A cet effet, je me presente, afin de ne pas etre catche par l'antispam,
+>>> car il est mechant et je ne l'aime pas.
+>>> 
+>>> Merci beaucoup.
+>>> 
+>>> Cordialement,
+>>> 
+>>> --
+>>> Le script vivant.
+>>> .
+<<< 250 OK
+maximum number of mails have been sent (1)
+</pre>
+
+h1. Configuration
+
+You can put default configuration options in ~/.smtptest.conf, in JSON format. Example:
+
+bq. <pre>
+folays@tree:~$ cat .smtptest.conf
+{"mail_from":"postmaster@domain.tld","recipient":"postmaster@domain.tld"}
+</pre>
